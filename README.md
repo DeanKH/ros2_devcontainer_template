@@ -26,7 +26,7 @@ devcontainer_template/
 ├── compose.yaml            # Docker Compose configuration
 ├── .devcontainer/
 │   └── devcontainer.json   # VS Code devcontainer configuration
-├── cyclonedx.xml          # CycloneDX DDS configuration
+├── cyclonedds.xml          # CycloneDDS configuration
 ├── bash_history           # Persistent bash history
 └── README.md              # This file
 ```

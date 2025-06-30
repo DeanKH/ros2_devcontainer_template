@@ -1,4 +1,4 @@
-# ROS2 + CUDA Development Co├── cyclonedds.xml          # CycloneDDS DDS configurationtainer Template
+# ROS2 + CUDA Development Container Template
 
 This template provides a comprehensive development environment for ROS2 projects with CUDA support, suitable for both C++ and Python development.
 
@@ -75,6 +75,7 @@ This template includes full NVIDIA GPU support:
 - Environment variables for GPU access
 
 Test GPU access:
+
 ```bash
 nvidia-smi
 nvcc --version
@@ -89,6 +90,7 @@ nvcc --version
 ## Volumes
 
 Persistent volumes for:
+
 - Source code
 - VS Code extensions
 - Pip cache
@@ -98,18 +100,23 @@ Persistent volumes for:
 ## Troubleshooting
 
 ### X11 Issues
+
 If GUI applications don't work, ensure X11 forwarding is properly configured:
+
 ```bash
 xhost +local:docker
 ```
 
 ### GPU Issues
+
 Verify NVIDIA Docker runtime is installed on your host:
+
 ```bash
 docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 ```
 
 ### Permission Issues
+
 Ensure UID/GID are properly set in compose.yaml to match your host user.
 
 ## License

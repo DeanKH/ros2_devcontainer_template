@@ -1,0 +1,123 @@
+{
+  "name": "ROS2 CUDA Development",
+  "dockerComposeFile": [
+    "../compose.yaml"
+  ],
+  "service": "ros2-dev",
+  "workspaceFolder": "/home/developer/workspace",
+  "remoteUser": "developer",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Python development
+        "ms-python.python",
+        "ms-python.isort",
+        "ms-python.black-formatter",
+        "ms-python.pylint",
+        "ms-python.flake8",
+        // C++ development
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "xaver.clang-format",
+        // CMake support
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "cheshirekow.cmake-format",
+        // ROS2 development
+        "ms-iot.vscode-ros",
+        // Docker support
+        "ms-azuretools.vscode-docker",
+        // General development
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-vscode.hexeditor",
+        // Git support
+        "eamodio.gitlens",
+        // Optional AI assistance
+        "github.copilot",
+        "github.copilot-chat"
+      ],
+      "settings": {
+        // Python settings
+        "python.defaultInterpreterPath": "/usr/bin/python3",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.linting.flake8Enabled": true,
+        "python.formatting.provider": "black",
+        "python.sortImports.provider": "isort",
+        "python.analysis.autoImportCompletions": true,
+        "python.analysis.typeCheckingMode": "basic",
+        // C++ settings
+        "[cpp]": {
+          "editor.defaultFormatter": "xaver.clang-format"
+        },
+        "[c]": {
+          "editor.defaultFormatter": "xaver.clang-format"
+        },
+        "C_Cpp.default.cppStandard": "c++17",
+        "C_Cpp.default.cStandard": "c11",
+        "C_Cpp.default.intelliSenseMode": "linux-clang-x64",
+        "clangd.arguments": [
+          "--background-index",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--header-insertion=iwyu"
+        ],
+        // CMake settings
+        "cmake.configureOnOpen": true,
+        "cmake.buildDirectory": "${workspaceFolder}/build",
+        // File associations
+        "files.associations": {
+          "*.launch": "xml",
+          "*.xacro": "xml",
+          "*.urdf": "xml",
+          "*.sdf": "xml",
+          "*.world": "xml",
+          "*.config": "yaml",
+          "*.repos": "yaml"
+        },
+        // Editor settings
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "editor.rulers": [
+          100
+        ],
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        // Terminal settings
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash",
+            "args": [
+              "-l"
+            ]
+          }
+        },
+        // Git settings
+        "git.enableSmartCommit": true,
+        "git.confirmSync": false,
+        // ROS settings
+        "ros.distro": "humble",
+        "ros.rosSetupScript": "/opt/ros/humble/setup.bash"
+      }
+    }
+  },
+  "postCreateCommand": "rosdep update",
+  "remoteEnv": {
+    "ROS_DOMAIN_ID": "0"
+  },
+  "forwardPorts": [
+    8888 // Jupyter notebook port
+  ],
+  "portsAttributes": {
+    "8888": {
+      "label": "Jupyter Notebook",
+      "onAutoForward": "notify"
+    }
+  }
+}

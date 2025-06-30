@@ -1,0 +1,14 @@
+# Example workspace configuration for ROS2 projects
+# This file can be used to configure colcon build behavior
+
+[build]
+symlink-install = true
+packages-ignore = []
+packages-skip = []
+packages-up-to = []
+packages-select = []
+
+[test]
+packages-select = []
+packages-skip = []
+packages-ignore = []

@@ -1,0 +1,50 @@
+services:
+  ros2-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_UID: ${UID:-1000}
+        USER_GID: ${GID:-1000}
+    container_name: ros2-dev-cuda
+    privileged: true
+    tty: true
+    stdin_open: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=file:///cyclonedds.xml
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    network_mode: host
+    volumes:
+      # X11 forwarding for GUI applications
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Mount source code
+      - ./:/home/developer/workspace/src
+      # Mount CycloneDDS configuration
+      - ./cyclonedds.xml:/cyclonedds.xml:ro
+      # Persist bash history
+      - type: bind
+        source: ./bash_history
+        target: /home/developer/.bash_history
+      # Optional: persist VS Code extensions
+      - vscode-extensions:/home/developer/.vscode-server/extensions
+      # Optional: persist pip cache
+      - pip-cache:/home/developer/.cache/pip
+      # Optional: persist colcon cache
+      - colcon-cache:/home/developer/.colcon
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    user: developer
+    working_dir: /home/developer/workspace
+
+volumes:
+  vscode-extensions:
+  pip-cache:
+  colcon-cache:
